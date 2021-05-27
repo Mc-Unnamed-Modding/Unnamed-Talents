@@ -8,16 +8,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.piglin.PiglinEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-@OnlyIn(Dist.CLIENT)
+
 public class TalentGUIMain extends Screen
 {
 
@@ -30,11 +34,14 @@ public class TalentGUIMain extends Screen
     Minecraft mc = Minecraft.getInstance();
     MainWindow mainWindow = mc.getWindow();
     FontRenderer font = mc.font;
+    public net.minecraft.entity.monster.piglin.PiglinTasks pickUpItem;
+
 
 
     public TalentGUIMain (ITextComponent component)
     {
         super(component);
+
     }
 
     @Override
@@ -50,27 +57,31 @@ public class TalentGUIMain extends Screen
     }
 
     @Override
-    protected void init()
-    {}
+    public void init()
+    {
+        super.init();
+    }
+
+    @Override
+    public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
+    {
+        renderBackground( stack,  1 );
+        super.render( stack, mouseX, mouseY, partialTicks );
+
+        x = (mainWindow.getGuiScaledWidth() / 2) - (boxWidth / 2);
+        y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
+
+        Minecraft.getInstance().getTextureManager().bind(box);
+        RenderSystem.enableBlend();
+        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, 184, 184, 184, 184);
+    }
 
     @Override
     public void renderBackground(MatrixStack stack, int p_renderBackground_1_)
     {
-        if (this.mc != null)
-        {
-            this.fillGradient( stack, 0, 0, this.width, this.height, 0x66222222, 0x66333333 );
-            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiScreenEvent.BackgroundDrawnEvent( this, stack ));
-        }
-        else
-            this.renderBackground( stack, p_renderBackground_1_ );
-
-
-        boxHeight = 256;
-        boxWidth = 256;
-        Minecraft.getInstance().getTextureManager().bind(box);
-        RenderSystem.disableBlend();
-        this.blit( stack,  x, y, 0, 0,  boxWidth, boxHeight );
+        super.renderBackground(stack,p_renderBackground_1_);
     }
+
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll)
     {
