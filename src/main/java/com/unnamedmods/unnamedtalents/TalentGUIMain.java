@@ -65,9 +65,13 @@ public class TalentGUIMain extends Screen
 
         Minecraft.getInstance().getTextureManager().bind(box);
 
-        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
+        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,
+                0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
+
         Minecraft.getInstance().getTextureManager().bind(otherBox);
-        blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92, 0, 0f, 0f, 55, 26, 55, 26);
+        blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
+                0, 0f, 0f, 55 /* ComponentWidth */,
+                26 /* ComponentHeight */, 26 /* ComponentHeight */, 55 /* ComponentWidth */);
     }
 
     // if UnnamedTalents.keybindings.isDown() & iteration == 1 -> iteration++ setOverlayImage (iteration 1 coordinates)
@@ -119,7 +123,7 @@ public class TalentGUIMain extends Screen
 
     public class TestGui extends Screen
     {
-        TalentGUIMain talent = new TalentGUIMain(this);
+        TalentGUIMain talent = new TalentGUIMain(null);
         private final Screen old;
 
         public TestGui(@Nullable Screen old)
@@ -153,7 +157,7 @@ public class TalentGUIMain extends Screen
             super.render(stack, mouseX, mouseY, partialTicks);
             if (talent != null)
             {
-                talent.init(mc, 184, 184);
+                talent.init(mc, 0, 0);
                 talent.render(stack,mouseX,mouseY,partialTicks);
             }
 
