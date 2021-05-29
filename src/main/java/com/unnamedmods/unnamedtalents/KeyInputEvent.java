@@ -1,5 +1,6 @@
 package com.unnamedmods.unnamedtalents;
 
+import com.unnamedmods.unnamedtalents.skills.activeskills.SkillUndyingSpirit;
 import net.java.games.input.Keyboard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.monster.piglin.PiglinEntity;
@@ -19,7 +20,7 @@ public class KeyInputEvent
     {
         if (UnnamedTalents.keyBindings.isDown())
         {
-            Minecraft.getInstance().setScreen(new TalentGUIMain(new StringTextComponent("Hi there")));
+            Minecraft.getInstance().setScreen(new TalentGUIMain(null));
         }
     }
 }

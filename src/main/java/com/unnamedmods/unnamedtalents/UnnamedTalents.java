@@ -35,7 +35,6 @@ public class UnnamedTalents
 
     public static KeyBinding keyBindings = new KeyBinding("key.test", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.test");
 
-
     public UnnamedTalents()
     {
         MinecraftForge.EVENT_BUS.register(new KeyInputEvent());
