@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 public class TalentGUIMain extends Screen
 {
     private final ResourceLocation box = new ResourceLocation(UnnamedTalents.MOD_ID, "textures/gui/guitextures.png");
+    private final ResourceLocation otherBox = new ResourceLocation(UnnamedTalents.MOD_ID,  "textures/gui/guibutton.png");
     private static final ITextComponent TITLE = new TranslationTextComponent("block_renderer.gui.choose");
     private int boxWidth = 184;
     private int boxHeight = 184;
@@ -63,9 +64,10 @@ public class TalentGUIMain extends Screen
         y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
 
         Minecraft.getInstance().getTextureManager().bind(box);
-        RenderSystem.enableBlend();
-        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
 
+        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
+        Minecraft.getInstance().getTextureManager().bind(otherBox);
+        blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92, 0, 0f, 0f, 55, 26, 55, 26);
     }
 
     // if UnnamedTalents.keybindings.isDown() & iteration == 1 -> iteration++ setOverlayImage (iteration 1 coordinates)
@@ -104,6 +106,16 @@ public class TalentGUIMain extends Screen
     {
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
+
+
+    ///
+    ///
+    ///
+    /// TEST GUI
+    ///
+    ///
+    ///
+
 
     public class TestGui extends Screen
     {
@@ -149,7 +161,7 @@ public class TalentGUIMain extends Screen
             y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
 
             Minecraft.getInstance().getTextureManager().bind(box);
-            RenderSystem.enableBlend();
+
             blit(stack,mainWindow.getGuiScaledWidth() / 2,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
 
         }
