@@ -5,6 +5,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.resources.DataPackRegistries;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -12,12 +15,13 @@ import net.minecraft.util.text.TranslationTextComponent;
 import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 
 public class TalentGUIMain extends Screen
 {
     private final ResourceLocation box = new ResourceLocation(UnnamedTalents.MOD_ID, "textures/gui/guitextures.png");
-    private final ResourceLocation otherBox = new ResourceLocation(UnnamedTalents.MOD_ID,  "textures/gui/guibutton.png");
+
     private static final ITextComponent TITLE = new TranslationTextComponent("block_renderer.gui.choose");
     private int boxWidth = 184;
     private int boxHeight = 184;
@@ -26,6 +30,7 @@ public class TalentGUIMain extends Screen
 
     @Nullable
     private final Screen old;
+
 
     Minecraft mc = Minecraft.getInstance();
     MainWindow mainWindow = mc.getWindow();
@@ -48,10 +53,12 @@ public class TalentGUIMain extends Screen
        return false;
     }
 
+
     @Override
     public void init()
     {
-        super.init();
+        assert mc != null;
+        addButton(new CustomWidget(92,  92, 55, 26, TITLE, button -> { mc.setScreen(new TestGui(new TalentGUIMain(null)));}));
     }
 
     @Override
@@ -67,11 +74,6 @@ public class TalentGUIMain extends Screen
 
         blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,
                 0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
-
-        Minecraft.getInstance().getTextureManager().bind(otherBox);
-        blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
-                0, 0f, 0f, 55 /* ComponentWidth */,
-                26 /* ComponentHeight */, 26 /* ComponentHeight */, 55 /* ComponentWidth */);
     }
 
     // if UnnamedTalents.keybindings.isDown() & iteration == 1 -> iteration++ setOverlayImage (iteration 1 coordinates)
@@ -105,6 +107,7 @@ public class TalentGUIMain extends Screen
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
+    //if (mx >= (centerX - coordinateXOffset) && mx <= (centerX - coordinateXOffset) + 55 && my >= (centerY - coordinateYOffset) && my <= (centerY - coordinateYOffset) + 26)
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY)
     {
@@ -161,12 +164,9 @@ public class TalentGUIMain extends Screen
                 talent.render(stack,mouseX,mouseY,partialTicks);
             }
 
-            x = (mainWindow.getGuiScaledWidth() / 2) - (boxWidth / 2);
-            y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
-
             Minecraft.getInstance().getTextureManager().bind(box);
 
-            blit(stack,mainWindow.getGuiScaledWidth() / 2,mainWindow.getGuiScaledHeight() / 2 - 92,0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
+            blit(stack,Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2,Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 - 92,0, 0F, 0F, 184, 184, 184, 184);
 
         }
 

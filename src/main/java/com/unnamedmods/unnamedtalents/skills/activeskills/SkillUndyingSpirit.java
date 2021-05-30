@@ -15,6 +15,7 @@ public class SkillUndyingSpirit extends ActiveSkills
     @Override
     public void doActiveSkill ()
     {
-        entity.teleportTo(10,100,10);
+        assert entity != null;
+
     }
 }
