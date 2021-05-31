@@ -1,4 +1,4 @@
-package com.unnamedmods.unnamedtalents.skills.activeskills;
+package com.unnamedmods.unnamedtalents.player.skills.activeskills;
 
 import net.minecraft.entity.player.PlayerEntity;
 

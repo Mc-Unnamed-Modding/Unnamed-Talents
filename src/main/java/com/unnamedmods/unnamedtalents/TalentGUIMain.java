@@ -58,22 +58,23 @@ public class TalentGUIMain extends Screen
     public void init()
     {
         assert mc != null;
-        addButton(new CustomWidget(92,  92, 55, 26, TITLE, button -> { mc.setScreen(new TestGui(new TalentGUIMain(null)));}));
+        addButton(new CustomWidget(mainWindow.getGuiScaledWidth() / 2 - 92,  mainWindow.getGuiScaledHeight() / 2 - 92, 55, 26, TITLE, button -> { mc.setScreen(new TestGui(new TalentGUIMain(null)));}));
     }
 
     @Override
     public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
     {
         renderBackground(stack,1 );
-        super.render(stack, mouseX, mouseY, partialTicks);
-
         x = (mainWindow.getGuiScaledWidth() / 2) - (boxWidth / 2);
         y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
 
         Minecraft.getInstance().getTextureManager().bind(box);
 
-        blit(stack,mainWindow.getGuiScaledWidth() / 2 - 92,mainWindow.getGuiScaledHeight() / 2 - 92,
-                0, 0F, 0F, boxWidth, boxHeight, boxWidth, boxHeight);
+        blit(stack, mainWindow.getGuiScaledWidth()  / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
+                0, 0f, 0f, 184 /* ComponentWidth */,
+                184 /* ComponentHeight */, 184 /* ComponentHeight */, 184 /* ComponentWidth */);
+
+        super.render(stack, mouseX, mouseY, partialTicks);
     }
 
     // if UnnamedTalents.keybindings.isDown() & iteration == 1 -> iteration++ setOverlayImage (iteration 1 coordinates)
@@ -157,7 +158,6 @@ public class TalentGUIMain extends Screen
         public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
         {
             renderBackground(stack,1 );
-            super.render(stack, mouseX, mouseY, partialTicks);
             if (talent != null)
             {
                 talent.init(mc, 0, 0);
@@ -165,9 +165,8 @@ public class TalentGUIMain extends Screen
             }
 
             Minecraft.getInstance().getTextureManager().bind(box);
-
             blit(stack,Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2,Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 - 92,0, 0F, 0F, 184, 184, 184, 184);
-
+            super.render(stack, mouseX, mouseY, partialTicks);
         }
 
         // if UnnamedTalents.keybindings.isDown() & iteration == 1 -> iteration++ setOverlayImage (iteration 1 coordinates)

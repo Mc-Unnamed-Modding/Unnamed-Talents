@@ -1,6 +1,7 @@
 package com.unnamedmods.unnamedtalents;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.AbstractButton;
@@ -23,13 +24,14 @@ public class CustomWidget extends Button
     private int height;
     private ITextComponent component;
     private IPressable pressable;
+    MainWindow mainWindow = Minecraft.getInstance().getWindow();
 
 
     public CustomWidget(int x, int y, int width, int height, ITextComponent component, IPressable pressable)
     {
         super(x, y, width, height, component, pressable);
-        this.x = Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - x;
-        this.y = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 -y;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.component = component;
@@ -42,18 +44,12 @@ public class CustomWidget extends Button
         if (this.isHovered() && Minecraft.getInstance().screen instanceof TalentGUIMain)
         {
             Minecraft.getInstance().getTextureManager().bind(hoveredButton);
-            blit(matrix, this.x, this.y,
-                    0, 0f, 0f, this.width /* ComponentWidth */,
-                    this.height /* ComponentHeight */, this.height /* ComponentHeight */, this.width /* ComponentWidth */);
         }
 
         else
-            {
-                Minecraft.getInstance().getTextureManager().bind(otherBox);
-                blit(matrix, this.x, this.y,
-                        0, 0f, 0f, this.width /* ComponentWidth */,
-                        this.height /* ComponentHeight */, this.height /* ComponentHeight */, this.width /* ComponentWidth */);
-            }
+        {
+            Minecraft.getInstance().getTextureManager().bind(otherBox);
+        }
+        blit(matrix, this.x, this.y, 0, 0f, 0f, this.width /* ComponentWidth */, this.height /* ComponentHeight */, this.height /* ComponentHeight */, this.width /* ComponentWidth */);
     }
-
 }

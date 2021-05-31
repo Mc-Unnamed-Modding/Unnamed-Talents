@@ -1,9 +1,7 @@
-package com.unnamedmods.unnamedtalents.skills.activeskills;
+package com.unnamedmods.unnamedtalents.player.skills.activeskills;
 
-import net.minecraft.entity.monster.ZombieEntity;
+import com.unnamedmods.unnamedtalents.player.skills.activeskills.ActiveSkills;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.RayTraceResult;
 
 public class SkillUndyingSpirit extends ActiveSkills
 {
@@ -16,6 +14,5 @@ public class SkillUndyingSpirit extends ActiveSkills
     public void doActiveSkill ()
     {
         assert entity != null;
-
     }
 }
