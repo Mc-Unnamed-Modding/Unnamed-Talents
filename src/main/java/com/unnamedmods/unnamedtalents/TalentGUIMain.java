@@ -2,6 +2,7 @@ package com.unnamedmods.unnamedtalents;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.unnamedmods.unnamedtalents.player.skills.playercapability.PlayerCapProvider;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -12,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.common.ForgeHooks;
 import org.lwjgl.system.CallbackI;
 
 import javax.annotation.Nullable;
@@ -21,12 +23,17 @@ import java.util.Objects;
 public class TalentGUIMain extends Screen
 {
     private final ResourceLocation box = new ResourceLocation(UnnamedTalents.MOD_ID, "textures/gui/guitextures.png");
+    public final ResourceLocation hoveredButton = new ResourceLocation(UnnamedTalents.MOD_ID,  "textures/gui/guibuttonhovered.png");
+    public final ResourceLocation otherBox = new ResourceLocation(UnnamedTalents.MOD_ID,  "textures/gui/guibutton.png");
 
     private static final ITextComponent TITLE = new TranslationTextComponent("block_renderer.gui.choose");
     private int boxWidth = 184;
     private int boxHeight = 184;
     private int x;
     private int y;
+    private int z;
+
+    public boolean test = false;
 
     @Nullable
     private final Screen old;
@@ -39,7 +46,12 @@ public class TalentGUIMain extends Screen
     {
         super(TITLE);
         this.old = old;
+        Minecraft.getInstance().player.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null) // Use this method to initialize icons of skills
+                .filter(iPlayerCap -> !iPlayerCap.isAdrenalineUnlocked())
+                .ifPresent(iPlayerCap -> test = true);
+        System.out.println(test);
     }
+
 
     @Override
     public boolean shouldCloseOnEsc()
@@ -54,26 +66,29 @@ public class TalentGUIMain extends Screen
     }
 
 
+    @SuppressWarnings("all")
     @Override
     public void init()
     {
         assert mc != null;
-        addButton(new CustomWidget(mainWindow.getGuiScaledWidth() / 2 - 92,  mainWindow.getGuiScaledHeight() / 2 - 92, 55, 26, TITLE, button -> { mc.setScreen(new TestGui(new TalentGUIMain(null)));}));
+        addButton(new CustomWidget(mainWindow.getGuiScaledWidth() / 2 - 92,  mainWindow.getGuiScaledHeight() / 2 - 92, 55, 26, TITLE, button ->
+        {
+            Minecraft.getInstance().player.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
+                    .filter(iPlayerCap -> test)
+                    .ifPresent(iPlayerCap -> mc.setScreen(new TestGui(new TalentGUIMain(null))));
+        }));
     }
 
     @Override
     public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
     {
+
+
         renderBackground(stack,1 );
-        x = (mainWindow.getGuiScaledWidth() / 2) - (boxWidth / 2);
-        y = (mainWindow.getGuiScaledHeight() / 2) - (boxHeight / 2);
-
         Minecraft.getInstance().getTextureManager().bind(box);
-
-        blit(stack, mainWindow.getGuiScaledWidth()  / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
+        blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
                 0, 0f, 0f, 184 /* ComponentWidth */,
                 184 /* ComponentHeight */, 184 /* ComponentHeight */, 184 /* ComponentWidth */);
-
         super.render(stack, mouseX, mouseY, partialTicks);
     }
 
@@ -115,6 +130,13 @@ public class TalentGUIMain extends Screen
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
+    @Override
+    public void onClose()
+    {
+        z = 0;
+        mc.setScreen(null);
+    }
+
 
     ///
     ///
@@ -152,6 +174,7 @@ public class TalentGUIMain extends Screen
         public void init()
         {
             super.init();
+
         }
 
         @Override

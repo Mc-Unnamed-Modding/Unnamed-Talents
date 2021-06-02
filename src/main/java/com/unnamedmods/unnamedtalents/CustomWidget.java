@@ -25,6 +25,7 @@ public class CustomWidget extends Button
     private ITextComponent component;
     private IPressable pressable;
     MainWindow mainWindow = Minecraft.getInstance().getWindow();
+    TalentGUIMain main = new TalentGUIMain(null);
 
 
     public CustomWidget(int x, int y, int width, int height, ITextComponent component, IPressable pressable)
@@ -43,6 +44,7 @@ public class CustomWidget extends Button
     {
         if (this.isHovered() && Minecraft.getInstance().screen instanceof TalentGUIMain)
         {
+
             Minecraft.getInstance().getTextureManager().bind(hoveredButton);
         }
 

@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+@SuppressWarnings("all")
 public class PlayerCapProvider implements ICapabilitySerializable<INBT>
 {
     @CapabilityInject(IPlayerCap.class)
