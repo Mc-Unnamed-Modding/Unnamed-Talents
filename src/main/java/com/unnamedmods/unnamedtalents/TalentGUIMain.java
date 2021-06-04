@@ -2,7 +2,7 @@ package com.unnamedmods.unnamedtalents;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.unnamedmods.unnamedtalents.player.skills.playercapability.PlayerCapProvider;
+import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCapProvider;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;

@@ -1,8 +1,8 @@
 package com.unnamedmods.unnamedtalents;
 
-import com.unnamedmods.unnamedtalents.player.skills.playercapability.IPlayerCap;
-import com.unnamedmods.unnamedtalents.player.skills.playercapability.PlayerCap;
-import com.unnamedmods.unnamedtalents.player.skills.playercapability.PlayerCapStorage;
+import com.unnamedmods.unnamedtalents.player.playercapability.IPlayerCap;
+import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCap;
+import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCapStorage;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.client.settings.KeyConflictContext;

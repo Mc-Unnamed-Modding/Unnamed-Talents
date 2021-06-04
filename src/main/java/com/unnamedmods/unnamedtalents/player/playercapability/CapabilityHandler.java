@@ -1,4 +1,4 @@
-package com.unnamedmods.unnamedtalents.player.skills.playercapability;
+package com.unnamedmods.unnamedtalents.player.playercapability;
 
 import com.unnamedmods.unnamedtalents.UnnamedTalents;
 import net.minecraft.entity.Entity;
@@ -23,8 +23,8 @@ public class CapabilityHandler
     {
         if (event.getObject() instanceof PlayerEntity)
         {
+            //noinspection SpellCheckingInspection
             event.addCapability(new ResourceLocation(UnnamedTalents.MOD_ID, "playercap"), new PlayerCapProvider());
-
         }
     }
 
@@ -38,10 +38,18 @@ public class CapabilityHandler
             // .filter for conditional lambdas
             event.getPlayer().getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
                     .filter(iPlayerCap -> !iPlayerCap.isAdrenalineUnlocked())
-                    .ifPresent(iPlayerCap -> iPlayerCap.setCombatLevel((byte) 0));
+                    .ifPresent(iPlayerCap ->
+                    {
+                        iPlayerCap.setAttackXP(iPlayerCap.getAttackXP() + 1);
+                        iPlayerCap.setCombatXP(Math.floorDiv(iPlayerCap.getAttackXP(), 3));
+                    });
 
             event.getPlayer().getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
-                    .ifPresent(iPlayerCap -> System.out.println(iPlayerCap.getCombatLevel()));
+                    .ifPresent(iPlayerCap ->
+                    {
+                        System.out.println(iPlayerCap.getAttackXP());
+                        System.out.println(iPlayerCap.getCombatXP());
+                    });
         }
     }
 
@@ -76,11 +84,10 @@ public class CapabilityHandler
                 ServerPlayerEntity newPlayer = (ServerPlayerEntity) event.getPlayer();
 
                 IPlayerCap originalPlayerCapability = player.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
-                        .orElseThrow(() -> new IllegalArgumentException("At clone event"));
+                .orElseThrow(() -> new IllegalArgumentException("At clone event"));
 
                 newPlayer.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
-                         .ifPresent((IPlayerCap newCap) ->
-                {
+                .ifPresent((IPlayerCap newCap) -> {
                     newCap.setCombatLevel(originalPlayerCapability.getCombatLevel());
                     newCap.setAttackLevel(originalPlayerCapability.getAttackLevel());
                     newCap.setPersistenceUnlocked(originalPlayerCapability.isPersistenceUnlocked());
