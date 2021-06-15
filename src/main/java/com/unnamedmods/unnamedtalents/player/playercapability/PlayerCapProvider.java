@@ -24,6 +24,7 @@ public class PlayerCapProvider implements ICapabilitySerializable<INBT>
         return cap == PLAYER_CAP_CAPABILITY ? instance.cast() : LazyOptional.empty();
     }
 
+
     @Override
     public INBT serializeNBT()
     {

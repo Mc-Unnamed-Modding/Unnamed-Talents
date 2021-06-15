@@ -4,8 +4,9 @@ import java.util.HashMap;
 
 public class PlayerCap implements IPlayerCap
 {
-    private final int childSkillPointGain = 1;
+    private final short childSkillPointGain = 1;
     private final int levelGain = 1;
+    private final int parentSkillPointGain = 2;
 
     private byte maxAbilityLevel;
     private int XPThreshold;
@@ -92,8 +93,11 @@ public class PlayerCap implements IPlayerCap
     private boolean skillBuilder;
     private byte builderLevel;
 
+    private boolean isKeyPressed;
+
     public PlayerCap ()
     {
+        this.isKeyPressed = false;
         this.maxAbilityLevel = 3;
         this.XPThreshold = 64;
         this.skillCategoryXPThreshold = 192;
@@ -202,6 +206,18 @@ public class PlayerCap implements IPlayerCap
     public void setSkillPoints(short skillPoints)
     {
         this.skillPoints = skillPoints;
+    }
+
+    @Override
+    public boolean isKeyPressed()
+    {
+        return this.isKeyPressed;
+    }
+
+    @Override
+    public void setKeyPressed(boolean keyPressed)
+    {
+        this.isKeyPressed = keyPressed;
     }
 
     @Override
@@ -346,6 +362,12 @@ public class PlayerCap implements IPlayerCap
     public void setCombatXP(int combatXP)
     {
         this.combatXP = combatXP;
+        if (this.combatXP >= (this.skillCategoryXPThreshold * this.combatLevel))
+        {
+            this.combatXP = (this.combatXP - (this.skillCategoryXPThreshold * this.combatLevel));
+            this.combatLevel += levelGain;
+            this.skillPoints += parentSkillPointGain;
+        }
     }
 
     @Override
@@ -604,6 +626,12 @@ public class PlayerCap implements IPlayerCap
     public void setSurvivalXP(int survivalXP)
     {
         this.survivalXP = survivalXP;
+        if (this.survivalXP >= (this.skillCategoryXPThreshold * this.survivalLevel))
+        {
+            this.survivalXP = (this.survivalXP - (this.skillCategoryXPThreshold * this.survivalLevel));
+            this.survivalLevel += levelGain;
+            this.skillPoints += parentSkillPointGain;
+        }
     }
 
     @Override
@@ -862,6 +890,12 @@ public class PlayerCap implements IPlayerCap
     public void setMagicXP(int magicXP)
     {
         this.magicXP = magicXP;
+        if (this.magicXP >= (this.skillCategoryXPThreshold * this.magicLevel))
+        {
+            this.magicXP = (this.magicXP - (this.skillCategoryXPThreshold * this.magicLevel));
+            this.magicLevel += levelGain;
+            this.skillPoints += parentSkillPointGain;
+        }
     }
 
     @Override
@@ -1120,6 +1154,12 @@ public class PlayerCap implements IPlayerCap
     public void setLaborXP(int laborXP)
     {
         this.laborXP = laborXP;
+        if (this.laborXP >= (this.skillCategoryXPThreshold * this.laborLevel))
+        {
+            this.laborXP = (this.laborXP - (this.skillCategoryXPThreshold * this.laborLevel));
+            this.laborLevel += levelGain;
+            this.skillPoints += parentSkillPointGain;
+        }
     }
 
     @Override

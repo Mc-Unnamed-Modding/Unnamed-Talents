@@ -7,6 +7,8 @@ public interface IPlayerCap
     int getSkillCategoryXPMax();
     void setSkillPoints(short skillPoints);
 
+    boolean isKeyPressed();
+    void setKeyPressed(boolean keyPressed);
     // Combat
     byte getCombatLevel();
     int getCombatXP();

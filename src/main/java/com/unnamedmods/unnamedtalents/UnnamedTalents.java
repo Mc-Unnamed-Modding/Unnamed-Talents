@@ -1,5 +1,7 @@
 package com.unnamedmods.unnamedtalents;
 
+import com.google.common.graph.Network;
+import com.unnamedmods.unnamedtalents.network.NetworkHandler;
 import com.unnamedmods.unnamedtalents.player.playercapability.IPlayerCap;
 import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCap;
 import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCapStorage;
@@ -24,6 +26,8 @@ public class UnnamedTalents
     public static final String MOD_ID = "unnamedtalents";
 
     public static KeyBinding keyBindings = new KeyBinding("key.test", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_G, "key.categories.test");
+    public static KeyBinding testBinding = new KeyBinding("key.test2", KeyConflictContext.UNIVERSAL, InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_P, "key.categories.test");
+
 
     public UnnamedTalents()
     {
@@ -43,14 +47,18 @@ public class UnnamedTalents
     private void setup(final FMLCommonSetupEvent event)
     {
         CapabilityManager.INSTANCE.register(IPlayerCap.class, new PlayerCapStorage(), PlayerCap::new);
+        NetworkHandler.init();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event)
     {
         ClientRegistry.registerKeyBinding(keyBindings);
+        ClientRegistry.registerKeyBinding(testBinding);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {}
 
     private void processIMC(final InterModProcessEvent event) {}
+
+
 }

@@ -29,11 +29,6 @@ public class TalentGUIMain extends Screen
     private static final ITextComponent TITLE = new TranslationTextComponent("block_renderer.gui.choose");
     private int boxWidth = 184;
     private int boxHeight = 184;
-    private int x;
-    private int y;
-    private int z;
-
-    public boolean test = false;
 
     @Nullable
     private final Screen old;
@@ -46,10 +41,7 @@ public class TalentGUIMain extends Screen
     {
         super(TITLE);
         this.old = old;
-        Minecraft.getInstance().player.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null) // Use this method to initialize icons of skills
-                .filter(iPlayerCap -> !iPlayerCap.isAdrenalineUnlocked())
-                .ifPresent(iPlayerCap -> test = true);
-        System.out.println(test);
+
     }
 
 
@@ -73,17 +65,13 @@ public class TalentGUIMain extends Screen
         assert mc != null;
         addButton(new CustomWidget(mainWindow.getGuiScaledWidth() / 2 - 92,  mainWindow.getGuiScaledHeight() / 2 - 92, 55, 26, TITLE, button ->
         {
-            Minecraft.getInstance().player.getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
-                    .filter(iPlayerCap -> test)
-                    .ifPresent(iPlayerCap -> mc.setScreen(new TestGui(new TalentGUIMain(null))));
+             mc.setScreen(new TestGui(new TalentGUIMain(null)));
         }));
     }
 
     @Override
     public void render(MatrixStack stack, int mouseX, int mouseY, float partialTicks)
     {
-
-
         renderBackground(stack,1 );
         Minecraft.getInstance().getTextureManager().bind(box);
         blit(stack, mainWindow.getGuiScaledWidth() / 2 - 92, mainWindow.getGuiScaledHeight() / 2 - 92,
@@ -133,7 +121,6 @@ public class TalentGUIMain extends Screen
     @Override
     public void onClose()
     {
-        z = 0;
         mc.setScreen(null);
     }
 

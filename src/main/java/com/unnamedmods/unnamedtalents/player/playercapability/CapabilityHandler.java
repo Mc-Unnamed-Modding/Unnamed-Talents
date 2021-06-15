@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -35,6 +36,7 @@ public class CapabilityHandler
     {
         if (event.getPlayer() != null && !event.getPlayer().getCommandSenderWorld().isClientSide)
         {
+
             // .filter for conditional lambdas
             event.getPlayer().getCapability(PlayerCapProvider.PLAYER_CAP_CAPABILITY, null)
                     .filter(iPlayerCap -> !iPlayerCap.isAdrenalineUnlocked())

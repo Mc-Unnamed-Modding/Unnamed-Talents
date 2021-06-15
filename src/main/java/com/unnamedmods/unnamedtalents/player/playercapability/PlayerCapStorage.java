@@ -15,6 +15,11 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCap>
     public INBT writeNBT(Capability<IPlayerCap> capability, IPlayerCap instance, Direction side)
     {
         CompoundNBT tag = new CompoundNBT();
+        tag.putShort("skillPoints", instance.getSkillPoints());
+        tag.putInt("XPThreshold",  instance.getXPMax());
+        tag.putInt("skillCategoryXPThreshold", instance.getSkillCategoryXPMax());
+
+
         tag.putByte("combatLevel", instance.getCombatLevel());
         tag.putByte("attackLevel", instance.getAttackLevel());
         tag.putBoolean("skillPersistence", instance.isPersistenceUnlocked());
@@ -62,6 +67,7 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCap>
     public void readNBT(Capability<IPlayerCap> capability, IPlayerCap instance, Direction side, INBT nbt)
     {
         CompoundNBT tag = (CompoundNBT) nbt;
+        instance.setSkillPoints(tag.getShort("skillPoints"));
         instance.setCombatLevel(tag.getByte("combatLevel"));
         instance.setAttackLevel(tag.getByte("attackLevel"));
         instance.setPersistenceUnlocked(tag.getBoolean("skillPersistence"));
