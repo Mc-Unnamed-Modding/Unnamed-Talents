@@ -24,9 +24,6 @@ public class CustomWidget extends Button
     private int height;
     private ITextComponent component;
     private IPressable pressable;
-    MainWindow mainWindow = Minecraft.getInstance().getWindow();
-    TalentGUIMain main = new TalentGUIMain(null);
-
 
     public CustomWidget(int x, int y, int width, int height, ITextComponent component, IPressable pressable)
     {

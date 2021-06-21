@@ -3,23 +3,16 @@ package com.unnamedmods.unnamedtalents.player.skills;
 import com.unnamedmods.unnamedtalents.UnnamedTalents;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 
 // Handles XP
 @Mod.EventBusSubscriber(modid = UnnamedTalents.MOD_ID)
 public class SkillHelper
 {
-    HashMap<Integer, String> playerData = new HashMap<>();
+    int value = 10;
 
-    public HashMap<Integer, String> getPlayerData()
+    public String toString()
     {
-        return playerData;
-    }
-
-    public void setPlayerData(HashMap<Integer, String> playerData)
-    {
-        this.playerData = playerData;
-
+        return this.value < 10 ? "0" + this.value : "" + this.value;
     }
 }

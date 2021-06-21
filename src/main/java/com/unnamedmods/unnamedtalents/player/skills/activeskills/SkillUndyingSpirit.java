@@ -1,10 +1,7 @@
 package com.unnamedmods.unnamedtalents.player.skills.activeskills;
 
-import com.unnamedmods.unnamedtalents.player.skills.activeskills.ActiveSkills;
-import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCap;
-import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCapProvider;
+import com.unnamedmods.unnamedtalents.player.playercapimpl.PlayerCapProvider;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
 
 public class SkillUndyingSpirit extends ActiveSkills
 {

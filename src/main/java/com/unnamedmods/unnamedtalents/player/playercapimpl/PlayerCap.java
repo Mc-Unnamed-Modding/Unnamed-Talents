@@ -1,6 +1,6 @@
-package com.unnamedmods.unnamedtalents.player.playercapability;
+package com.unnamedmods.unnamedtalents.player.playercapimpl;
 
-import java.util.HashMap;
+import com.unnamedmods.unnamedtalents.player.playercap.IPlayerCap;
 
 public class PlayerCap implements IPlayerCap
 {

@@ -1,12 +1,12 @@
-package com.unnamedmods.unnamedtalents.player.playercapability;
+package com.unnamedmods.unnamedtalents.player.playercapimpl;
 
 import com.unnamedmods.unnamedtalents.UnnamedTalents;
+import com.unnamedmods.unnamedtalents.player.playercap.IPlayerCap;
+import com.unnamedmods.unnamedtalents.player.playercapimpl.PlayerCapProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -29,7 +29,7 @@ public class CapabilityHandler
         }
     }
 
-    @SuppressWarnings("all")
+
     // Testing Event (Remove Later)
     @SubscribeEvent
     public static void onEntityHit (AttackEntityEvent event)

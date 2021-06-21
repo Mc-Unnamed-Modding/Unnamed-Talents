@@ -1,5 +1,6 @@
-package com.unnamedmods.unnamedtalents.player.playercapability;
+package com.unnamedmods.unnamedtalents.player.playercapimpl;
 
+import com.unnamedmods.unnamedtalents.player.playercap.IPlayerCap;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
@@ -9,7 +10,6 @@ import javax.annotation.Nullable;
 
 public class PlayerCapStorage implements Capability.IStorage<IPlayerCap>
 {
-
     @Nullable
     @Override
     public INBT writeNBT(Capability<IPlayerCap> capability, IPlayerCap instance, Direction side)
@@ -18,7 +18,8 @@ public class PlayerCapStorage implements Capability.IStorage<IPlayerCap>
         tag.putShort("skillPoints", instance.getSkillPoints());
         tag.putInt("XPThreshold",  instance.getXPMax());
         tag.putInt("skillCategoryXPThreshold", instance.getSkillCategoryXPMax());
-
+        tag.putByte("combatLevel", instance.getCombatLevel());
+        tag.putInt("combatXP", instance.getCombatXP());
 
         tag.putByte("combatLevel", instance.getCombatLevel());
         tag.putByte("attackLevel", instance.getAttackLevel());

@@ -1,10 +1,9 @@
 package com.unnamedmods.unnamedtalents;
 
-import com.google.common.graph.Network;
 import com.unnamedmods.unnamedtalents.network.NetworkHandler;
-import com.unnamedmods.unnamedtalents.player.playercapability.IPlayerCap;
-import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCap;
-import com.unnamedmods.unnamedtalents.player.playercapability.PlayerCapStorage;
+import com.unnamedmods.unnamedtalents.player.playercap.IPlayerCap;
+import com.unnamedmods.unnamedtalents.player.playercapimpl.PlayerCap;
+import com.unnamedmods.unnamedtalents.player.playercapimpl.PlayerCapStorage;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.InputMappings;
 import net.minecraftforge.client.settings.KeyConflictContext;
@@ -59,6 +58,4 @@ public class UnnamedTalents
     private void enqueueIMC(final InterModEnqueueEvent event) {}
 
     private void processIMC(final InterModProcessEvent event) {}
-
-
 }

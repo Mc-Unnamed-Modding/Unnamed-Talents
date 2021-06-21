@@ -1,5 +1,6 @@
-package com.unnamedmods.unnamedtalents.player.playercapability;
+package com.unnamedmods.unnamedtalents.player.playercapimpl;
 
+import com.unnamedmods.unnamedtalents.player.playercap.IPlayerCap;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -23,7 +24,6 @@ public class PlayerCapProvider implements ICapabilitySerializable<INBT>
     {
         return cap == PLAYER_CAP_CAPABILITY ? instance.cast() : LazyOptional.empty();
     }
-
 
     @Override
     public INBT serializeNBT()
